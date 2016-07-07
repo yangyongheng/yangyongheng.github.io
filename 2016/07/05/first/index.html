@@ -4,19 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>杨永恒</title>
+    <title>Fresco+OkHttp入门配置 | 杨永恒</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="杨永恒">
     
 
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="杨永恒">
-<meta property="og:url" content="https://yangyongheng.github.io/index.html">
+    <meta name="description" content="Android Studio Gradle 引入12345dependencies &amp;#123;  // your project&apos;s other dependencies  compile: &quot;com.facebook.fresco:drawee:0.11.0+&quot;  compile: &quot;com.facebook.fresco:imagepipeline-okhttp:0.11.0+&quot;&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fresco+OkHttp入门配置">
+<meta property="og:url" content="https://yangyongheng.github.io/2016/07/05/first/index.html">
 <meta property="og:site_name" content="杨永恒">
+<meta property="og:description" content="Android Studio Gradle 引入12345dependencies &amp;#123;  // your project&apos;s other dependencies  compile: &quot;com.facebook.fresco:drawee:0.11.0+&quot;  compile: &quot;com.facebook.fresco:imagepipeline-okhttp:0.11.0+&quot;&amp;#125;">
+<meta property="og:updated_time" content="2016-07-07T14:20:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨永恒">
+<meta name="twitter:title" content="Fresco+OkHttp入门配置">
+<meta name="twitter:description" content="Android Studio Gradle 引入12345dependencies &amp;#123;  // your project&apos;s other dependencies  compile: &quot;com.facebook.fresco:drawee:0.11.0+&quot;  compile: &quot;com.facebook.fresco:imagepipeline-okhttp:0.11.0+&quot;&amp;#125;">
 
     
     <link rel="alternative" href="/atom.xml" title="杨永恒" type="application/atom+xml">
@@ -61,12 +65,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2016/07/05/first/" title="Fresco+OkHttp入门配置" itemprop="url">Fresco+OkHttp入门配置</a>
@@ -80,9 +82,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h3 id="Android-Studio-Gradle-引入"><a href="#Android-Studio-Gradle-引入" class="headerlink" title="Android Studio Gradle 引入"></a>Android Studio Gradle 引入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">  // your project<span class="string">'s other dependencies</span></div><div class="line">  compile: "com.facebook.fresco:drawee:0.11.0+"</div><div class="line">  compile: "com.facebook.fresco:imagepipeline-okhttp:0.11.0+"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-Gradle-引入"><span class="toc-number">1.</span> <span class="toc-text">Android Studio Gradle 引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Application-初始化时，进行初始化："><span class="toc-number">2.</span> <span class="toc-text">在 Application 初始化时，进行初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在xml布局文件中-加入SimpleDraweeView"><span class="toc-number">2.1.</span> <span class="toc-text">在xml布局文件中,加入SimpleDraweeView:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始加载图片"><span class="toc-number">2.2.</span> <span class="toc-text">开始加载图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#必须设置layout-width和layout-height"><span class="toc-number">2.3.</span> <span class="toc-text">必须设置layout_width和layout_height</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="Android-Studio-Gradle-引入"><a href="#Android-Studio-Gradle-引入" class="headerlink" title="Android Studio Gradle 引入"></a>Android Studio Gradle 引入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">  // your project<span class="string">'s other dependencies</span></div><div class="line">  compile: "com.facebook.fresco:drawee:0.11.0+"</div><div class="line">  compile: "com.facebook.fresco:imagepipeline-okhttp:0.11.0+"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="在-Application-初始化时，进行初始化："><a href="#在-Application-初始化时，进行初始化：" class="headerlink" title="在 Application 初始化时，进行初始化："></a>在 Application 初始化时，进行初始化：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpClient okHttpClient = new OkHttpClient(); </div><div class="line">ImagePipelineConfig config = OkHttpImagePipelineConfigFactory</div><div class="line">    .newBuilder(getApplicationContext(), okHttpClient)</div><div class="line">    .build();</div><div class="line">Fresco.initialize(getApplicationContext(), config);</div></pre></td></tr></table></figure>
 <h4 id="在xml布局文件中-加入SimpleDraweeView"><a href="#在xml布局文件中-加入SimpleDraweeView" class="headerlink" title="在xml布局文件中,加入SimpleDraweeView:"></a>在xml布局文件中,加入SimpleDraweeView:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;com.facebook.drawee.view.SimpleDraweeView</div><div class="line">    android:id=<span class="string">"@+id/my_image_view"</span></div><div class="line">    android:layout_width=<span class="string">"20dp"</span></div><div class="line">    android:layout_height=<span class="string">"20dp"</span></div><div class="line">    fresco:placeholderImage=<span class="string">"@drawable/my_drawable"</span></div><div class="line">  /&gt;</div></pre></td></tr></table></figure>
 <h4 id="开始加载图片"><a href="#开始加载图片" class="headerlink" title="开始加载图片"></a>开始加载图片</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"https://raw.githubusercontent.com/facebook/fresco/gh-pages/static/fresco-logo.png"</span>);</div><div class="line">SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.my_image_view);</div><div class="line">draweeView.setImageURI(uri);</div></pre></td></tr></table></figure>
@@ -96,14 +105,9 @@
 <p>固定宽高比</p>
 <p>只有希望显示的固定宽高比时，可以使用wrap_content。</p>
 <p>如果希望显示的图片保持一定宽高比例，如果 4:3，则在XML中:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;com.facebook.drawee.view.SimpleDraweeView</div><div class="line">    android:id=<span class="string">"@+id/my_image_view"</span></div><div class="line">    android:layout_width=<span class="string">"20dp"</span></div><div class="line">    android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">    fresco:placeholderImage=<span class="string">"@drawable/my_drawable"</span></div><div class="line">  /&gt;</div><div class="line"></div><div class="line">  mSimpleDraweeView.setAspectRatio(1.33f);</div></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -111,27 +115,56 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-	  	<span></span>
-		<a href="/2016/07/05/first/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/07/05/first/" data-count-type="comments">&nbsp;</a>
-	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
 </div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+2105796" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
 
 </footer>
 
+   	       
+	</article>
+	
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/07/05/first/" data-title="Fresco+OkHttp入门配置" data-url="https://yangyongheng.github.io/2016/07/05/first/"></div>
+</section>
 
-    </article>
 
-
-
-
-
-
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-Gradle-引入"><span class="toc-number">1.</span> <span class="toc-text">Android Studio Gradle 引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Application-初始化时，进行初始化："><span class="toc-number">2.</span> <span class="toc-text">在 Application 初始化时，进行初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在xml布局文件中-加入SimpleDraweeView"><span class="toc-number">2.1.</span> <span class="toc-text">在xml布局文件中,加入SimpleDraweeView:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始加载图片"><span class="toc-number">2.2.</span> <span class="toc-text">开始加载图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#必须设置layout-width和layout-height"><span class="toc-number">2.3.</span> <span class="toc-text">必须设置layout_width和layout_height</span></a></li></ol></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -244,14 +277,54 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
 
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"杨永恒"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
@@ -319,4 +392,4 @@ ga('send', 'pageview');
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
