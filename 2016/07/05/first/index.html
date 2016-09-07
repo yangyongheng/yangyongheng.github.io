@@ -11,16 +11,19 @@
     
 
     
-    <meta name="description" content="Android Studio Gradle 引入12345dependencies &amp;#123;  // your project&apos;s other dependencies  compile: &quot;com.facebook.fresco:drawee:0.11.0+&quot;  compile: &quot;com.facebook.fresco:imagepipeline-okhttp:0.11.0+&quot;&amp;#125;">
+    <meta name="description" content="为何选择frescoFresco相比其他图片库如Picasso，UIL，Glide相比，所具有的最重要的几个独有特性：
+在Android 5.0以下系统，图片不存储在Java heap，而是存储在ashmemheap，中间的字节buffer同样位于native heap。使应用有更多内存空间，降低OOM风险，减少GC次数。渐进式的JPEG呈现。图片可以在任意点进行裁剪，而不是中心，即自定义居中焦点">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fresco+OkHttp入门配置">
 <meta property="og:url" content="https://yangyongheng.github.io/2016/07/05/first/index.html">
 <meta property="og:site_name" content="杨永恒">
-<meta property="og:description" content="Android Studio Gradle 引入12345dependencies &amp;#123;  // your project&apos;s other dependencies  compile: &quot;com.facebook.fresco:drawee:0.11.0+&quot;  compile: &quot;com.facebook.fresco:imagepipeline-okhttp:0.11.0+&quot;&amp;#125;">
-<meta property="og:updated_time" content="2016-07-07T14:35:03.000Z">
+<meta property="og:description" content="为何选择frescoFresco相比其他图片库如Picasso，UIL，Glide相比，所具有的最重要的几个独有特性：
+在Android 5.0以下系统，图片不存储在Java heap，而是存储在ashmemheap，中间的字节buffer同样位于native heap。使应用有更多内存空间，降低OOM风险，减少GC次数。渐进式的JPEG呈现。图片可以在任意点进行裁剪，而不是中心，即自定义居中焦点">
+<meta property="og:updated_time" content="2016-07-08T06:22:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fresco+OkHttp入门配置">
-<meta name="twitter:description" content="Android Studio Gradle 引入12345dependencies &amp;#123;  // your project&apos;s other dependencies  compile: &quot;com.facebook.fresco:drawee:0.11.0+&quot;  compile: &quot;com.facebook.fresco:imagepipeline-okhttp:0.11.0+&quot;&amp;#125;">
+<meta name="twitter:description" content="为何选择frescoFresco相比其他图片库如Picasso，UIL，Glide相比，所具有的最重要的几个独有特性：
+在Android 5.0以下系统，图片不存储在Java heap，而是存储在ashmemheap，中间的字节buffer同样位于native heap。使应用有更多内存空间，降低OOM风险，减少GC次数。渐进式的JPEG呈现。图片可以在任意点进行裁剪，而不是中心，即自定义居中焦点">
 
     
     <link rel="alternative" href="/atom.xml" title="杨永恒" type="application/atom+xml">
@@ -87,11 +90,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-Gradle-引入"><span class="toc-number">1.</span> <span class="toc-text">Android Studio Gradle 引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Application-初始化时，进行初始化："><span class="toc-number">2.</span> <span class="toc-text">在 Application 初始化时，进行初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在xml布局文件中-加入SimpleDraweeView"><span class="toc-number">2.1.</span> <span class="toc-text">在xml布局文件中,加入SimpleDraweeView:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始加载图片"><span class="toc-number">2.2.</span> <span class="toc-text">开始加载图片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意：SimpleDraweeView在xml中必须设置layout-width和layout-height"><span class="toc-number">3.</span> <span class="toc-text">注意：SimpleDraweeView在xml中必须设置layout_width和layout_height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多"><span class="toc-number">4.</span> <span class="toc-text">更多</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择fresco"><span class="toc-number">1.</span> <span class="toc-text">为何选择fresco</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-Gradle-引入"><span class="toc-number">2.</span> <span class="toc-text">Android Studio Gradle 引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Application-初始化时，进行初始化："><span class="toc-number">3.</span> <span class="toc-text">在 Application 初始化时，进行初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在xml布局文件中-加入SimpleDraweeView"><span class="toc-number">3.1.</span> <span class="toc-text">在xml布局文件中,加入SimpleDraweeView:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始加载图片"><span class="toc-number">3.2.</span> <span class="toc-text">开始加载图片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意：SimpleDraweeView在xml中必须设置layout-width和layout-height"><span class="toc-number">4.</span> <span class="toc-text">注意：SimpleDraweeView在xml中必须设置layout_width和layout_height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多"><span class="toc-number">5.</span> <span class="toc-text">更多</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="Android-Studio-Gradle-引入"><a href="#Android-Studio-Gradle-引入" class="headerlink" title="Android Studio Gradle 引入"></a>Android Studio Gradle 引入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">  // your project<span class="string">'s other dependencies</span></div><div class="line">  compile: "com.facebook.fresco:drawee:0.11.0+"</div><div class="line">  compile: "com.facebook.fresco:imagepipeline-okhttp:0.11.0+"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<h3 id="为何选择fresco"><a href="#为何选择fresco" class="headerlink" title="为何选择fresco"></a>为何选择fresco</h3><p>Fresco相比其他图片库如Picasso，UIL，Glide相比，所具有的最重要的几个独有特性：</p>
+<p>在Android 5.0以下系统，图片不存储在Java heap，而是存储在ashmemheap，中间的字节buffer同样位于native heap。使应用有更多内存空间，降低OOM风险，减少GC次数。<br>渐进式的JPEG呈现。<br>图片可以在任意点进行裁剪，而不是中心，即自定义居中焦点。<br>JPEG可以在native进行resize，避免了在缩小图片时的OOM风险。<br>支持Gif和WebP。</p>
+<p>缺点：由于Fresco将图片放置到一块特殊的Native内存，这块内存的管理是由Fresco进行的，所以Fresco框架的体积比较庞大，会为应用增加1.5M左右的体积，而Glide等框架都不到1M</p>
+<h3 id="Android-Studio-Gradle-引入"><a href="#Android-Studio-Gradle-引入" class="headerlink" title="Android Studio Gradle 引入"></a>Android Studio Gradle 引入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">  // your project<span class="string">'s other dependencies</span></div><div class="line">  compile: "com.facebook.fresco:drawee:0.11.0+"</div><div class="line">  compile: "com.facebook.fresco:imagepipeline-okhttp:0.11.0+"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="在-Application-初始化时，进行初始化："><a href="#在-Application-初始化时，进行初始化：" class="headerlink" title="在 Application 初始化时，进行初始化："></a>在 Application 初始化时，进行初始化：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpClient okHttpClient = new OkHttpClient(); </div><div class="line">ImagePipelineConfig config = OkHttpImagePipelineConfigFactory</div><div class="line">    .newBuilder(getApplicationContext(), okHttpClient)</div><div class="line">    .build();</div><div class="line">Fresco.initialize(getApplicationContext(), config);</div></pre></td></tr></table></figure>
 <h4 id="在xml布局文件中-加入SimpleDraweeView"><a href="#在xml布局文件中-加入SimpleDraweeView" class="headerlink" title="在xml布局文件中,加入SimpleDraweeView:"></a>在xml布局文件中,加入SimpleDraweeView:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;com.facebook.drawee.view.SimpleDraweeView</div><div class="line">    android:id=<span class="string">"@+id/my_image_view"</span></div><div class="line">    android:layout_width=<span class="string">"20dp"</span></div><div class="line">    android:layout_height=<span class="string">"20dp"</span></div><div class="line">    fresco:placeholderImage=<span class="string">"@drawable/my_drawable"</span></div><div class="line">  /&gt;</div></pre></td></tr></table></figure>
 <h4 id="开始加载图片"><a href="#开始加载图片" class="headerlink" title="开始加载图片"></a>开始加载图片</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"https://raw.githubusercontent.com/facebook/fresco/gh-pages/static/fresco-logo.png"</span>);</div><div class="line">SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.my_image_view);</div><div class="line">draweeView.setImageURI(uri);</div></pre></td></tr></table></figure>
@@ -159,7 +165,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-Gradle-引入"><span class="toc-number">1.</span> <span class="toc-text">Android Studio Gradle 引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Application-初始化时，进行初始化："><span class="toc-number">2.</span> <span class="toc-text">在 Application 初始化时，进行初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在xml布局文件中-加入SimpleDraweeView"><span class="toc-number">2.1.</span> <span class="toc-text">在xml布局文件中,加入SimpleDraweeView:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始加载图片"><span class="toc-number">2.2.</span> <span class="toc-text">开始加载图片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意：SimpleDraweeView在xml中必须设置layout-width和layout-height"><span class="toc-number">3.</span> <span class="toc-text">注意：SimpleDraweeView在xml中必须设置layout_width和layout_height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多"><span class="toc-number">4.</span> <span class="toc-text">更多</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择fresco"><span class="toc-number">1.</span> <span class="toc-text">为何选择fresco</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-Gradle-引入"><span class="toc-number">2.</span> <span class="toc-text">Android Studio Gradle 引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Application-初始化时，进行初始化："><span class="toc-number">3.</span> <span class="toc-text">在 Application 初始化时，进行初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在xml布局文件中-加入SimpleDraweeView"><span class="toc-number">3.1.</span> <span class="toc-text">在xml布局文件中,加入SimpleDraweeView:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始加载图片"><span class="toc-number">3.2.</span> <span class="toc-text">开始加载图片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意：SimpleDraweeView在xml中必须设置layout-width和layout-height"><span class="toc-number">4.</span> <span class="toc-text">注意：SimpleDraweeView在xml中必须设置layout_width和layout_height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多"><span class="toc-number">5.</span> <span class="toc-text">更多</span></a></li></ol>
  
   </div>
 
@@ -180,6 +186,12 @@
         
           <li>
             
+            	<a href="https://onevcat.com/" target="_blank" title="喵神">喵神</a>
+            
+          </li>
+        
+          <li>
+            
             	<a href="http://blog.devtang.com/" target="_blank" title="唐巧的技术博客">唐巧的技术博客</a>
             
           </li>
@@ -187,6 +199,30 @@
           <li>
             
             	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.zhaiyifan.cn/" target="_blank" title="markzhai&#39;s home">markzhai&#39;s home</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://stormzhang.com/" target="_blank" title="stormzhang">stormzhang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/lmj623565791?viewmode=contents" target="_blank" title="张鸿洋">张鸿洋</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zengrong.net/" target="_blank" title="曾嵘">曾嵘</a>
             
           </li>
         
